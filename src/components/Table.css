@@ -1,0 +1,12 @@
+.my-table thead {
+  background-color: rgb(8, 0, 77) !important;
+  color: aliceblue !important;
+}
+.my-table tbody tr:nth-child(odd) {
+  background-color: #1f189b;
+  color: rgb(230, 230, 230);
+}
+.my-table tbody tr:nth-child(even) {
+  background-color: rgb(16, 5, 110);
+  color: rgb(230, 230, 230);
+}

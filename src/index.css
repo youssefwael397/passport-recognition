@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Josefin+Sans:ital,wght@0,400;1,405&family=Libre+Baskerville:ital@0;1&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+:root {
+  --my-primary-color: rgb(7, 0, 65);
+  --logo-color: #ffcd35;
+  /* --secondary-color:  */
+}
+
+body {
+  background-color: rgb(218, 218, 218);
+  /* overflow: hidden; */
+}
+/* #background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: transparent;
+  width: 100%;
+  height: 180vh;
+  z-index: -5;
+} */
+
+.my-bg {
+  background-color: var(--my-primary-color) !important;
+}
+.my-color {
+  color: var(--my-primary-color);
+}
+.my-font {
+  font-family: "Libre Baskerville", serif;
+}
+.logo {
+  font-family: "Bakbak One", cursive;
+  transition: all ease-in-out 0.2s;
+}
+.logo-span {
+  color: var(--logo-color);
+}
+.logo:hover {
+  color: var(--logo-color) !important;
+}
+/* .active {
+  color: var(--logo-color) !important;
+} */
+.active i {
+  color: var(--logo-color);
+}
