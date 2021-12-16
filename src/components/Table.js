@@ -3,33 +3,77 @@ import axios from 'axios'
 import './Table.css'
 export default function Table() {
 
-    const url = 'http://127.0.0.1:5000/api/admin/passports/'
-    const token = localStorage.getItem('token');
-
-    console.log(token)
+    // const url = 
+    // const token = localStorage.getItem('token');
 
     const [passportsList, setPassportsList] = useState([])
+    // const [whiteList, setWhiteList] = useState([])
+    // const [blackList, setBlackList] = useState([])
     const [filteredPassports, setFilteredPassports] = useState([])
     const [searchValue, setSearchValue] = useState('');
     let counter = 1;
 
     useEffect(() => {
-        axios.get(
-            url,
+        fetchData();
+    }, [])
+
+
+    const fetchData = async () => {
+        await axios.get(
+            'http://127.0.0.1:5000/api/admin/passports/',
             {
                 headers: {
-                    "access-token": token
+                    "access-token": localStorage.getItem('token')
                 }
-            }
-        )
-            .then(data => {
-                console.log(data.data)
-                setPassportsList(data.data);
+            }).then(data => {
 
-            }).then(error => {
-                console.log('error....')
+                // let passports = 
+                // console.log(passports)
+                
+                setPassportsList(data.data);
+                // console.log(passportsList)
+                
+
             })
-    },[token])
+    }
+
+
+    const handleChange = event => {
+        setSearchValue(event.target.value);
+      };
+
+
+    const handleAll = () => {
+        fetchData()
+    }
+
+    const handleWhiteList = () => {
+        const copyPassports = passportsList;
+        setPassportsList(copyPassports.filter( passport => passport.Status === true ))
+    }
+
+
+    const handleBlackList = () => {
+        // fetchData()
+        const copyPassports = passportsList;
+        setPassportsList(copyPassports.filter( passport => passport.Status === false ));
+    }
+
+    // const handleAscSort = () => {
+    //     // const copyPassports = passportsList;
+    //     // const result = sortJSON(copyPassports, 'Name', '123')
+    //     // setPassportsList(result);
+    // }
+
+
+    // function sortJSON(arr, key, way) {
+    //     return arr.sort((a, b) => {
+    //         var x = a[key]; var y = b[key];
+    //         if (way === '123') { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
+    //         if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
+    //     });
+    // }
+
 
     useEffect(()=>{
         const copyPassports = [...passportsList];
@@ -39,22 +83,39 @@ export default function Table() {
         setFilteredPassports(result);
     },[passportsList, searchValue])
 
-
-    const handleChange = event => {
-        setSearchValue(event.target.value);
-      };
-
     return (
         <div className='mx-auto my-3 container'>
-            <h2 className='my-font text-center'>Welcome in pd admin panel.</h2>
-            <div className="input-group mb-1">
+            <h2 className=' text-center'>Welcome in pd admin panel.</h2>
+            <div className="input-group my-2">
+                
+            {/* <button className=" input-group-text" >
+                    <i className="fas fa-sort-alpha-down text-primary "></i>
+                </button>
+                
+                    
+                
+                <button className="input-group-text " >
+                <i className="fas fa-sort-alpha-down-alt text-primary"></i>
+                </button> */}
+
                 <span className='input-group-text'>
-                    <i class="fas fa-search text-primary"></i>
+                    <i className="fas fa-search text-primary"></i>
                 </span>
+
                 <input type="search" placeholder="Search for any passport name, gender or country" value={searchValue} onChange={handleChange} className="form-control" aria-label="" aria-describedby="basic-addon1" />
-                <div className="input-group-prepend">
-                    <button className="btn btn-outline-secondary" type="button">Button</button>
-                </div>
+                
+                
+                
+                <button className="btn btn-secondary " type="button" onClick={handleAll}>All</button>
+            
+            
+                <button className="btn btn-primary" type="button" onClick={handleWhiteList}>White List</button>
+            
+            
+                <button className="btn btn-danger" type="button" onClick={handleBlackList}>Black List</button>
+                
+                
+                
             </div>
             <table className="table table-light table-hover"> {/* table-light table-hover */}
                 <thead>
@@ -66,13 +127,15 @@ export default function Table() {
                         <th scope="col">Date Of Birth</th>
                         <th scope="col">Expiration Date</th>
                         <th scope="col">Number</th>
+                        <th scope="col">Valid</th>
+                        <th scope="col">Problem</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         searchValue === '' ? (
                             passportsList.map(passport => (
-                                <tr>
+                                <tr key={passport.id}>
                                     <th scope="row">{counter++}</th>
                                     <td>{passport.Name + ' ' + passport.Surname}</td>
                                     <td>{passport.Sex }</td> {/* === 'M' ? 'Male' : 'Female' */}
@@ -80,11 +143,13 @@ export default function Table() {
                                     <td>{passport.DateOfBirth}</td>
                                     <td>{passport.ExpirationDate}</td>
                                     <td>{passport.Number}</td>
+                                    <td>{passport.Status ? <i className="fas fa-check-circle text-success"></i> : <i className="fas fa-times-circle text-danger"></i>}</td>
+                                    <td>{passport.Status ? ' not found ' : JSON.stringify(passport.Problem)}</td>
                                 </tr>
                             
                             ))) : (
                                 filteredPassports.map(passport => (
-                                    <tr>
+                                    <tr key={passport.id}>
                                         <th scope="row">{counter++}</th>
                                         <td>{passport.Name + ' ' + passport.Surname}</td>
                                         <td>{passport.Sex }</td> {/* === 'M' ? 'Male' : 'Female' */}
@@ -92,6 +157,8 @@ export default function Table() {
                                         <td>{passport.DateOfBirth}</td>
                                         <td>{passport.ExpirationDate}</td>
                                         <td>{passport.Number}</td>
+                                        <td>{passport.Status ? <i className="fas fa-check-circle text-success"></i> : <i className="fas fa-times-circle text-danger"></i>}</td>
+                                    <td>{passport.Status ? ' not found ' : JSON.stringify(passport.Problem)}</td>
                                     </tr>
                                 
                                 ))

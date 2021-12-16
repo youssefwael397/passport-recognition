@@ -11,7 +11,7 @@ export default function Home() {
 	const photoRef = useRef()
 	const url = 'http://127.0.0.1:5000/api/upload';
 
-	const myImage = document.getElementById('my-image');
+	// const myImage = document.getElementById('my-image');
 
 	const WIDTH = 388;
 	const HEIGHT = 290
@@ -69,12 +69,12 @@ export default function Home() {
 
 	const handleRequest = (e) => {
 		e.preventDefault();
-		console.log(image);
+		// console.log(image);
 		 
 		 const actual_img = image;
 		 console.log(actual_img)
 		 const form = new FormData()
-		 form.append('file', actual_img)
+		 form.append('image', actual_img)
 		 fetch(url,{
 			 method: 'POST',
 			 body: form
@@ -126,11 +126,11 @@ export default function Home() {
 
 								{playing ? (
 									<>
-										<button className="btn btn-secondary mx-2" onClick={stopVideo}><i class="fas fa-pause"></i></button>
+										<button className="btn btn-secondary mx-2" onClick={stopVideo}><i className="fas fa-pause"></i></button>
 										<button className="btn btn-primary mx-2" onClick={takePhoto}><i className="fas fa-camera"></i></button>
 									</>
 								) : (
-									<button className="btn btn-primary" onClick={startVideo}><i class="fas fa-play"></i></button>
+									<button className="btn btn-primary" onClick={startVideo}><i className="fas fa-play"></i></button>
 								)}
 							</div>
 
@@ -154,7 +154,7 @@ export default function Home() {
 								hasPhoto ? (
 									<>
 										<br />
-										<button className="btn  mx-2 btn-secondary " onClick={closePhoto}><i class="fas fs-5 fa-window-close"></i></button>
+										<button className="btn  mx-2 btn-secondary " onClick={closePhoto}><i className="fas fs-5 fa-window-close"></i></button>
 										<button className="btn  mx-2 btn-primary" onClick={handleRequest} >Add new passport</button>
 									</>
 								) : (null)

@@ -12,7 +12,7 @@ function Footer() {
                     <div className="col-md-6 mx-auto">
 
                         <h5 className="font-weight-bold mt-3 mb-4 logo">
-                            <i class="fas fa-dice-d20 logo-span"></i> P<span>D</span>
+                            <i className="fas fa-dice-d20 logo-span"></i> P<span>D</span>
                         </h5>
                         <p>This website was created in DEC 10, 2021.</p>
                         <p>
@@ -54,7 +54,7 @@ function Footer() {
             </ul>
 
             <div className="footer-copyright text-center py-3">
-                © 2021 Copyright : 
+                © 2021 Copyright :
                 <a href='/'> passdetector.com</a>
             </div>
         </footer >

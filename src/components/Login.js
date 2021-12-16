@@ -1,19 +1,36 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import './Login.css'
 
 export default function Login() {
+
     const url = 'http://127.0.0.1:5000/api/auth/login';
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isValid, setIsValid] = useState(true)
 
-    let navigate = useNavigate()
+    const [isValid, setIsValid] = useState(true);
 
+    // var token = localStorage.getItem('token')
 
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(localStorage.getItem('token')){
+            const token = localStorage.getItem('token')
+            const decoded = jwtDecode(token)
+            // console.log(decoded.role)
+            if (decoded.role) {
+                setIsValid(true)
+                navigate('/admin')
+            }else{
+                setIsValid(false)
+            }
+        }
+        
+    },[navigate])
 
 
     const handleSubmit = (e) => {
@@ -25,29 +42,58 @@ export default function Login() {
         axios.post(url, data)
             .then(
                 res => {
-                    // localStorage.setItem('token', res.data)
+                    localStorage.setItem('token', res.data)
                     const token = res.data;
                     console.log(token)
                     const decoded = jwtDecode(token)
                     console.log(decoded.role)
-                    if (decoded.role) {
-                        setIsValid(decoded.role);
-                        navigate('/admin')
-                    }
-                }
-            )
-            .catch(
-                error => {
-                    console.log(error)
-                    setIsValid(false)
+                    if (decoded.role === true) {
+                        setIsValid(true);
+                        window.location.reload();
+                    }}).catch(
+                    error => {
+                        console.log(error)
+                        setIsValid(false)
+                        
                         // navigate('/login');
                 }
                 
             )
 
-        // const token = localStorage.getItem('token');
-
     }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const data = {
+    //         username: username,
+    //         password: password
+    //     }
+
+    //     axios.post(url, data)
+    //         .then(
+    //             res => {
+    //                 const token = res.data;
+    //                 localStorage.setItem('token', token)
+    //                 // console.log(token)
+    //                 const decoded = jwtDecode(token)
+    //                 // console.log(decoded.role)
+    //                 if (decoded.role) {
+    //                     setIsValid(decoded.role)
+    //                     navigate('/admin')
+    //                 }
+    //             }
+    //         )
+    //         .catch(
+    //             error => {
+    //                 console.log(error)
+    //                 setIsValid(false)
+    //                     // navigate('/login');
+    //             }
+                
+    //         )
+
+    //     // const token = localStorage.getItem('token');
+
+    // }
 
     return (
         <div>

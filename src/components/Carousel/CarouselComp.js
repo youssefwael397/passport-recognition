@@ -13,30 +13,30 @@ import './CarouselComp.css';
 function CarouselComp() {
   return (
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+      <div className="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <h2 class="d-block w-100 text-center">Our team create a new service.</h2>
+      <div className="carousel-inner">
+        <div className="carousel-item active">
+          <h2 className="d-block w-100 text-center">Our team create a new service.</h2>
         </div>
-        <div class="carousel-item">
-          <h2 class="d-block w-100 text-center">Scan any image to detect if passport or not.</h2>
+        <div className="carousel-item">
+          <h2 className="d-block w-100 text-center">Scan any image to detect if passport or not.</h2>
         </div>
-        <div class="carousel-item">
-          <h2 class="d-block w-100 text-center">If it's passport, you 'll get its data.</h2>
+        <div className="carousel-item">
+          <h2 className="d-block w-100 text-center">If it's passport, you 'll get its data.</h2>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
       </button>
     </div>
 
